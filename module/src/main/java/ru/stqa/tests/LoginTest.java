@@ -4,10 +4,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import ru.stqa.enums.Links;
 import ru.stqa.pages.AdminLoginPage;
 import ru.stqa.pages.LeftRailMenu;
+import ru.stqa.tests.support.SelectDriver;
+
+import static ru.stqa.enums.Browsers.NIGHTLY;
 
 public class LoginTest {
 
@@ -17,7 +19,7 @@ public class LoginTest {
 
     @Before
     public void before() {
-        driver = new ChromeDriver();
+        driver = new SelectDriver().selectDriver(driver, NIGHTLY);
         driver.get(link);
     }
 
