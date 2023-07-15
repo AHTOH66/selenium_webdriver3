@@ -2,7 +2,7 @@ package ru.stqa.enums;
 
 public enum Links {
     GOOGLE ("www.google.com"),
-    LITECARD_ADMIN("localhost/litecard/admin/");
+    LITECART_ADMIN("localhost/litecart/admin/");
 
 
     private final String link;

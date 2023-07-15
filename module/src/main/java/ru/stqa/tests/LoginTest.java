@@ -13,7 +13,7 @@ public class LoginTest {
 
     public WebDriver driver;
     public AdminLoginPage loginPage = new AdminLoginPage();
-    public String link = Links.LITECARD_ADMIN.getLink();
+    public String link = Links.LITECART_ADMIN.getLink();
 
     @Before
     public void before() {
