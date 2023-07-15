@@ -10,9 +10,10 @@ import ru.stqa.enums.Browsers;
 
 import java.io.File;
 
-public class SelectDriver {
+public class SetBrowser {
 
-    public WebDriver selectDriver(WebDriver driver, Browsers browser) {
+    public WebDriver driver;
+    public WebDriver setBrowser(Browsers browser) {
         switch (browser) {
             case CHROME -> driver = new ChromeDriver();
             case FIREFOX -> driver = setBinary("Mozilla Firefox");

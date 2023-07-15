@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import ru.stqa.enums.Links;
 import ru.stqa.pages.AdminLoginPage;
 import ru.stqa.pages.LeftRailMenu;
-import ru.stqa.tests.support.SelectDriver;
+import ru.stqa.tests.support.SetBrowser;
 
 import static ru.stqa.enums.Browsers.NIGHTLY;
 
@@ -19,7 +19,7 @@ public class LoginTest {
 
     @Before
     public void before() {
-        driver = new SelectDriver().selectDriver(driver, NIGHTLY);
+        driver = new SetBrowser().setBrowser(NIGHTLY);
         driver.get(link);
     }
 
