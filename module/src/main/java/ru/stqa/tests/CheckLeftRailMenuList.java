@@ -5,17 +5,17 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.stqa.pages.AdminTests;
 
-public class LoginTest extends AdminTests {
+public class CheckLeftRailMenuList extends AdminTests {
 
     @Before
     public void before() {
         start();
+        login();
     }
 
     @Test
-    public void loginTest() {
-        login();
-        adminLogout();
+    public void checkLeftRailMenu() {
+        getLeftRailMenu().checkAllLinksOfLeftRail();
     }
 
     @After
