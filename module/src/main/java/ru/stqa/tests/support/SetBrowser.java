@@ -6,13 +6,10 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.stqa.enums.Browsers;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
-
-import static java.time.Duration.ofSeconds;
 
 public class SetBrowser {
 
