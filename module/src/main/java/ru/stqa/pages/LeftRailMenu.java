@@ -24,16 +24,13 @@ public class LeftRailMenu extends SetBrowser {
             ArrayList<WebElement> subList = new ArrayList<>(elementsList.get(e).findElements(By.className("name")));
             if (subList.size() > 1) {
                 for (int i = 1; i < subList.size(); i++) {
-                    WebElement line = subList.get(i);
-                    String header = line.getText();
-                    line.click();
-                    getMainPage().checkHeaderText(header);
+                    subList.get(i).click();
+                    getMainPage().checkHeaderText();
                     elementsList = new ArrayList<>(driver.findElements(By.id("app-")));
                     subList = new ArrayList<>(elementsList.get(e).findElements(By.className("name")));
                 }
             } else {
-                String header = elementsList.get(e).getText();
-                new MainPage().checkHeaderText(header);
+                getMainPage().checkHeaderText();
             }
         }
     }
