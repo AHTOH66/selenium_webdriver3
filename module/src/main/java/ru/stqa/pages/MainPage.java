@@ -11,6 +11,6 @@ public class MainPage extends SetBrowser {
     private final WebElement element = driver.findElement(By.id("content"));
 
     public void checkHeaderText(String text) {
-        text.equals(element.findElement(By.tagName("h1")).getText());
+        assert text.equals(element.findElement(By.tagName("h1")).getText());
     }
 }
