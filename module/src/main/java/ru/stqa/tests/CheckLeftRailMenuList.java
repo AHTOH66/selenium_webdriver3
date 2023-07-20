@@ -3,7 +3,7 @@ package ru.stqa.tests;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.stqa.pages.AdminTests;
+import ru.stqa.admin_pages.AdminTests;
 
 public class CheckLeftRailMenuList extends AdminTests {
 
@@ -20,6 +20,6 @@ public class CheckLeftRailMenuList extends AdminTests {
 
     @After
     public void after() {
-        cleanUp();
+        cleanUpBrowser();
     }
 }

@@ -17,7 +17,7 @@ public class SetBrowser {
     public WebDriver driver;
 
     public WebDriver setBrowser(Browsers browser) {
-        cleanUp();
+        cleanUpBrowser();
         switch (browser) {
             case CHROME -> driver = new ChromeDriver();
             case FIREFOX -> driver = setBinary("Mozilla Firefox");
@@ -29,7 +29,7 @@ public class SetBrowser {
     }
 
     public WebDriver setBrowser() {
-        cleanUp();
+        cleanUpBrowser();
         driver = new ChromeDriver();
         setUp();
         return driver;
@@ -46,10 +46,12 @@ public class SetBrowser {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    public void cleanUp() {
+    public void cleanUpBrowser() {
         if (tlDriver.get() != null) {
-            driver.quit();
-            driver = null;
+            if (driver !=null) {
+                driver.quit();
+                driver = null;
+            }
             tlDriver.set(null);
         }
     }
