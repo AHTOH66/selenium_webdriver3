@@ -43,6 +43,10 @@ public class LeftRailMenu extends SetBrowser {
         clickLinkOnLeftRail("Countries");
     }
 
+    public void clickGeoZonesPage() {
+        clickLinkOnLeftRail("Geo Zones");
+    }
+
     private ArrayList<WebElement> getAllLeftRailsLinks() {
         return new ArrayList<>(element.findElements(By.id("app-")));
     }

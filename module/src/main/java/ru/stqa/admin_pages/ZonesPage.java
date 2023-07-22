@@ -18,14 +18,14 @@ public class ZonesPage extends SetBrowser {
         for (int i = 0; i < allRow.size(); i++) {
             if (!allRow.get(i).findElement(By.xpath(".//td[6]")).getText().equals("0")) {
                 allRow.get(i).findElement(By.xpath(".//a")).click();
-                new AlphabeticalCheck().checkByAlphabetical(getListOfZOnes());
+                new AlphabeticalCheck().checkByAlphabetical(getListOfZones());
                 driver.navigate().back();
                 allRow = new CountryPage().getAllRowCountries();
             }
         }
     }
 
-    private ArrayList<String> getListOfZOnes() {
+    private ArrayList<String> getListOfZones() {
         WebElement table = driver.findElement(By.id("table-zones"));
         ArrayList<WebElement> row = new ArrayList<>(table.findElements(By.xpath("//tr/td[3]")));
         ArrayList<String> listOfZones = new ArrayList<>();

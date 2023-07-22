@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.stqa.admin_pages.AdminTests;
 
-public class CheckLeftRailMenuList extends AdminTests {
+public class CheckSortGeoZones extends AdminTests {
 
     @Before
     public void before() {
@@ -14,8 +14,11 @@ public class CheckLeftRailMenuList extends AdminTests {
     }
 
     @Test
-    public void checkLeftRailMenu() {
-        getLeftRailMenu().checkAllLinksOfLeftRail();
+    public void checkAlphabeticalSortGeoZones() {
+        getLeftRailMenu()
+                .clickGeoZonesPage();
+        getGeoZonesPage()
+                .checkAlphabeticalGeoZones();
         adminLogout();
     }
 

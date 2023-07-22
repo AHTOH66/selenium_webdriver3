@@ -27,6 +27,10 @@ public class AdminTests extends SetBrowser {
         return new LeftRailMenu();
     }
 
+    public GeoZonesPage getGeoZonesPage() {
+        return new GeoZonesPage();
+    }
+
     public CountryPage getCountryPage() {
         return new CountryPage();
     }

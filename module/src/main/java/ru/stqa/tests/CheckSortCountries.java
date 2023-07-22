@@ -20,6 +20,7 @@ public class CheckSortCountries extends AdminTests {
         getCountryPage()
                 .checkListOfCountries()
                 .checkListOfZones();
+        adminLogout();
     }
 
     @After
