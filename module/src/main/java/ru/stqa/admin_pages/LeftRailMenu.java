@@ -17,7 +17,7 @@ public class LeftRailMenu extends SetBrowser {
     }
 
     public void checkAllLinksOfLeftRail() {
-        ArrayList<WebElement> elementsList = new ArrayList<>(element.findElements(By.id("app-")));
+        ArrayList<WebElement> elementsList = new ArrayList<>(getAllLeftRailsLinks());
         for (int e = 0; e < elementsList.size(); e++) {
             elementsList.get(e).click();
             elementsList = new ArrayList<>(driver.findElements(By.id("app-")));
@@ -37,5 +37,24 @@ public class LeftRailMenu extends SetBrowser {
 
     public MainPage getMainPage() {
         return new MainPage();
+    }
+
+    public void clickCountriesPage() {
+        clickLinkOnLeftRail("Countries");
+    }
+
+    private ArrayList<WebElement> getAllLeftRailsLinks() {
+        return new ArrayList<>(element.findElements(By.id("app-")));
+    }
+
+    private void clickLinkOnLeftRail(String nameOfLink) {
+        ArrayList<WebElement> elementsList = new ArrayList<>(getAllLeftRailsLinks());
+        for (WebElement webElement : elementsList) {
+            WebElement row = webElement.findElement(By.className("name"));
+            if (row.getText().equals(nameOfLink)) {
+                row.click();
+                return;
+            }
+        }
     }
 }

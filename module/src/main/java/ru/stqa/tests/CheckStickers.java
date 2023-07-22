@@ -14,7 +14,7 @@ public class CheckStickers extends UserTests {
 
     @Test
     public void checkStickers() {
-        getMostPopularBlock()
+        getBlocksOnMainPage()
                 .checkMostPopularStickers()
                 .checkCampaignsStickers()
                 .checkLatestProductsStickers();

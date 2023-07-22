@@ -14,7 +14,7 @@ public class UserTests extends SetBrowser {
         driver.get(LITECART.getLink());
     }
 
-    public BlocksOnMainUserPage getMostPopularBlock() {
+    public BlocksOnMainUserPage getBlocksOnMainPage() {
         return new BlocksOnMainUserPage();
     }
 }
