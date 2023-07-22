@@ -14,7 +14,7 @@ public class CheckSortCountries extends AdminTests {
     }
 
     @Test
-    public void checkLeftRailMenu() {
+    public void checkAlphabeticalSort() {
         getLeftRailMenu()
                 .clickCountriesPage();
         getCountryPage()
