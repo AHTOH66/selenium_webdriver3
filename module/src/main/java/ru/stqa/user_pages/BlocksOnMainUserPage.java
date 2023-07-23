@@ -1,40 +1,40 @@
 package ru.stqa.user_pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ru.stqa.tests.support.CompareMethod;
 import ru.stqa.tests.support.SetBrowser;
 
 import java.util.ArrayList;
 
 public class BlocksOnMainUserPage extends SetBrowser {
 
-    private final WebDriver driver = tlDriver.get();
-    private final WebElement mostPopularBlock = driver.findElement(By.id("box-most-popular"));
-    private final WebElement campaigns = driver.findElement(By.id("box-campaigns"));
-    private final WebElement latestProducts = driver.findElement(By.id("box-latest-products"));
+    public WebDriver driver = tlDriver.get();
+    public WebElement mostPopularBlock = driver.findElement(By.id("box-most-popular"));
+    public WebElement campaigns = driver.findElement(By.id("box-campaigns"));
+    public WebElement latestProducts = driver.findElement(By.id("box-latest-products"));
+
+    private String price;
 
     public BlocksOnMainUserPage checkMostPopularStickers() {
-        ArrayList<WebElement> ducks = new ArrayList<>(getAllDucks(mostPopularBlock));
-        checkOnlyOneSticker(ducks);
+        checkOnlyOneSticker(getAllDucks(mostPopularBlock));
         return this;
     }
 
     public BlocksOnMainUserPage checkCampaignsStickers() {
-        ArrayList<WebElement> ducks = new ArrayList<>(getAllDucks(campaigns));
-        checkOnlyOneSticker(ducks);
+        checkOnlyOneSticker(getAllDucks(campaigns));
         return this;
     }
 
     public BlocksOnMainUserPage checkLatestProductsStickers() {
-        ArrayList<WebElement> ducks = new ArrayList<>(getAllDucks(latestProducts));
-        checkOnlyOneSticker(ducks);
+        checkOnlyOneSticker(getAllDucks(latestProducts));
         return this;
     }
 
     private ArrayList<WebElement> getAllDucks(WebElement element) {
-        ArrayList<WebElement> ducks = new ArrayList<>(element.findElements(By.className("product")));
-        return ducks;
+        return new ArrayList<>(element.findElements(By.className("product")));
     }
 
     private void checkOnlyOneSticker(ArrayList<WebElement> ducks) {
@@ -47,5 +47,98 @@ public class BlocksOnMainUserPage extends SetBrowser {
                 throw new NullPointerException("Duck number " + i + " has several stickers");
             }
         }
+    }
+
+    public void updateElementsOfBlocks() {
+        campaigns = driver.findElement(By.id("box-campaigns"));
+        mostPopularBlock = driver.findElement(By.id("box-most-popular"));
+        latestProducts = driver.findElement(By.id("box-latest-products"));
+    }
+
+    public BlocksOnMainUserPage checkTitle(WebElement element) {
+        WebElement duck = getFirstDuck(element);
+        String title = duck.findElement(By.className("name")).getText();
+        duck.click();
+        new CompareMethod().checkProductTitle(title);
+        backToMainPage();
+        return this;
+    }
+
+    public BlocksOnMainUserPage checkFullPrice(WebElement element) {
+        WebElement duck = getFirstDuck(element);
+        checkFullPriceElements(duck);
+        String priceOnMainPage = price;
+        duck.click();
+        checkFullPriceElements(driver.findElement(By.id("box-product")));
+        String priceOnProductPage = price;
+        new CompareMethod().textCompare(priceOnMainPage, priceOnProductPage);
+        backToMainPage();
+        return this;
+    }
+
+    //for Campaigns Block only
+    public BlocksOnMainUserPage checkDiscountPrice(WebElement element) {
+        WebElement duck = getFirstDuck(element);
+        checkDiscountPriceElements(duck);
+        String discountOnMainPage = price;
+        duck.click();
+        checkDiscountPriceElements(driver.findElement(By.id("box-product")));
+        String discountOnProductPage = price;
+        new CompareMethod().textCompare(discountOnMainPage, discountOnProductPage);
+        backToMainPage();
+        return this;
+    }
+
+    private void backToMainPage() {
+        driver.navigate().back();
+        updateElementsOfBlocks();
+    }
+
+    private WebElement getFirstDuck(WebElement element) {
+        return getAllDucks(element).get(0);
+    }
+
+    private void checkFullPriceElements(WebElement duck) {
+        WebElement fullPrice;
+
+        //if there is a discount, check that the fullPrice is crossed out
+        if (duck.findElements(By.className("regular-price")).size() != 0) {
+            fullPrice = duck.findElement(By.className("regular-price"));
+            assert fullPrice.getTagName().equals("s");
+        } else {
+            fullPrice = duck.findElement(By.className("price"));
+        }
+
+        //check that the color for red is the same as for green and blue
+        String cssColorValue = fullPrice.getCssValue("color");
+        String[] color = removeChar(cssColorValue);
+        assert color[0].equals(color[1]) && color[0].equals(color[2]);
+        price = fullPrice.getText();
+    }
+
+    private void checkDiscountPriceElements(WebElement duck) {
+        WebElement discountPrice = duck.findElement(By.className("campaign-price"));
+
+        //check that text for the discount is strong
+        assert discountPrice.getTagName().equals("strong");
+
+        //check that the color is red
+        String cssColorValue = discountPrice.getCssValue("color");
+        String[] color = removeChar(cssColorValue);
+        assert color[1].equals(color[2]);
+
+        //check that size for the discount price element is bigger
+        Dimension fullPriceSize = driver.findElement(By.className("regular-price")).getSize();
+        Dimension discountPriceSize = discountPrice.getSize();
+        assert fullPriceSize.width < discountPriceSize.width && fullPriceSize.height < discountPriceSize.height;
+        price = discountPrice.getText();
+    }
+
+    private String[] removeChar(String colors) {
+        String charsToRemove = "rgba(),";
+        for (char c : charsToRemove.toCharArray()) {
+            colors = colors.replace(String.valueOf(c), "");
+        }
+        return colors.split(" ");
     }
 }
