@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.tests.support.CompareMethod;
-import ru.stqa.tests.support.GetCssElements;
+import ru.stqa.tests.support.GetCssAttributes;
 import ru.stqa.tests.support.SetBrowser;
 
 import java.util.ArrayList;
@@ -110,7 +110,7 @@ public class BlocksOnMainUserPage extends SetBrowser {
         }
 
         //check that the color for red is the same as for green and blue
-        String[] color = new GetCssElements().getColors(fullPrice);
+        String[] color = new GetCssAttributes().getColors(fullPrice);
         assert color[0].equals(color[1]) && color[0].equals(color[2]);
         price = fullPrice.getText();
     }
@@ -122,13 +122,13 @@ public class BlocksOnMainUserPage extends SetBrowser {
         assert discountPrice.getTagName().equals("strong");
 
         //check that the color is red
-        String[] color = new GetCssElements().getColors(discountPrice);
+        String[] color = new GetCssAttributes().getColors(discountPrice);
         assert color[1].equals(color[2]);
 
         //check that font for the discount price element is bigger
-        int fullPriceSize = new GetCssElements().getFontSize(
+        Double fullPriceSize = new GetCssAttributes().getFontSize(
                 driver.findElement(By.className("regular-price")));
-        int discountPriceSize = new GetCssElements().getFontSize(discountPrice);
+        Double discountPriceSize = new GetCssAttributes().getFontSize(discountPrice);
         assert fullPriceSize < discountPriceSize;
         price = discountPrice.getText();
     }

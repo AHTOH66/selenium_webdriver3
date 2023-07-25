@@ -5,8 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.stqa.user_pages.UserTests;
 
-import static ru.stqa.enums.Browsers.CHROME;
-import static ru.stqa.enums.Browsers.FIREFOX;
+import static ru.stqa.enums.Browsers.*;
 
 public class CheckProductDetails extends UserTests {
 

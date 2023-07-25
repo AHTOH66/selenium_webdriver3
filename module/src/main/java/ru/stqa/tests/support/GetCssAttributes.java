@@ -2,7 +2,7 @@ package ru.stqa.tests.support;
 
 import org.openqa.selenium.WebElement;
 
-public class GetCssElements {
+public class GetCssAttributes {
 
     public String[] getColors(WebElement element) {
         String colors = element.getCssValue("color");
@@ -13,12 +13,12 @@ public class GetCssElements {
         return colors.split(" ");
     }
 
-    public int getFontSize(WebElement element) {
+    public Double getFontSize(WebElement element) {
         String fontSize = element.getCssValue("font-size");
         String charsToRemove = "px";
         for (char c : charsToRemove.toCharArray()) {
             fontSize = fontSize.replace(String.valueOf(c), "");
         }
-        return Integer.parseInt(fontSize);
+        return Double.parseDouble(fontSize);
     }
 }
