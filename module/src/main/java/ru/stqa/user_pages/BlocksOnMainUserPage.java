@@ -1,10 +1,10 @@
 package ru.stqa.user_pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.tests.support.CompareMethod;
+import ru.stqa.tests.support.GetCssElements;
 import ru.stqa.tests.support.SetBrowser;
 
 import java.util.ArrayList;
@@ -110,8 +110,7 @@ public class BlocksOnMainUserPage extends SetBrowser {
         }
 
         //check that the color for red is the same as for green and blue
-        String cssColorValue = fullPrice.getCssValue("color");
-        String[] color = removeChar(cssColorValue);
+        String[] color = new GetCssElements().getColors(fullPrice);
         assert color[0].equals(color[1]) && color[0].equals(color[2]);
         price = fullPrice.getText();
     }
@@ -123,22 +122,14 @@ public class BlocksOnMainUserPage extends SetBrowser {
         assert discountPrice.getTagName().equals("strong");
 
         //check that the color is red
-        String cssColorValue = discountPrice.getCssValue("color");
-        String[] color = removeChar(cssColorValue);
+        String[] color = new GetCssElements().getColors(discountPrice);
         assert color[1].equals(color[2]);
 
-        //check that size for the discount price element is bigger
-        Dimension fullPriceSize = driver.findElement(By.className("regular-price")).getSize();
-        Dimension discountPriceSize = discountPrice.getSize();
-        assert fullPriceSize.width < discountPriceSize.width && fullPriceSize.height < discountPriceSize.height;
+        //check that font for the discount price element is bigger
+        int fullPriceSize = new GetCssElements().getFontSize(
+                driver.findElement(By.className("regular-price")));
+        int discountPriceSize = new GetCssElements().getFontSize(discountPrice);
+        assert fullPriceSize < discountPriceSize;
         price = discountPrice.getText();
-    }
-
-    private String[] removeChar(String colors) {
-        String charsToRemove = "rgba(),";
-        for (char c : charsToRemove.toCharArray()) {
-            colors = colors.replace(String.valueOf(c), "");
-        }
-        return colors.split(" ");
     }
 }
