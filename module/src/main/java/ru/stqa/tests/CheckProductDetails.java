@@ -11,7 +11,7 @@ public class CheckProductDetails extends UserTests {
 
     @Before
     public void before() {
-        start(CHROME);
+        start(FIREFOX);
     }
 
     @Test

@@ -6,19 +6,19 @@ public class GetCssAttributes {
 
     public String[] getColors(WebElement element) {
         String colors = element.getCssValue("color");
-        String charsToRemove = "rgba(),";
-        for (char c : charsToRemove.toCharArray()) {
-            colors = colors.replace(String.valueOf(c), "");
-        }
+        colors = removeChars(colors, "rgba(),");
         return colors.split(" ");
     }
 
     public Double getFontSize(WebElement element) {
         String fontSize = element.getCssValue("font-size");
-        String charsToRemove = "px";
+        return Double.parseDouble(removeChars(fontSize, "px"));
+    }
+
+    private String removeChars(String newString, String charsToRemove) {
         for (char c : charsToRemove.toCharArray()) {
-            fontSize = fontSize.replace(String.valueOf(c), "");
+            newString = newString.replace(String.valueOf(c), "");
         }
-        return Double.parseDouble(fontSize);
+        return newString;
     }
 }
