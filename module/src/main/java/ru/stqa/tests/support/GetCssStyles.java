@@ -2,7 +2,7 @@ package ru.stqa.tests.support;
 
 import org.openqa.selenium.WebElement;
 
-public class GetCssAttributes {
+public class GetCssStyles {
 
     public String[] getColors(WebElement element) {
         String colors = element.getCssValue("color");

@@ -23,4 +23,8 @@ public class UserTests extends SetBrowser {
     public BlocksOnMainUserPage getBlocksOnMainPage() {
         return new BlocksOnMainUserPage();
     }
+
+    public LeftRailBlockForUser getLeftRailBlock() {
+        return new LeftRailBlockForUser();
+    }
 }
