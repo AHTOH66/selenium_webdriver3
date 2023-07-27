@@ -1,6 +1,7 @@
 package ru.stqa.user_pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -19,8 +20,8 @@ public class CreateAccountPage extends SetBrowser {
         element.findElement(By.name("address1")).sendKeys("address");
         element.findElement(By.name("postcode")).sendKeys("12345");
         element.findElement(By.name("city")).sendKeys("city");
-        Select select = new Select(element.findElement(By.name("country_code")));
-        select.selectByVisibleText("United States");
+        element.findElement(By.className("select2-selection__arrow")).click();
+        element.findElement(By.xpath("//li[contains(., 'United States')]")).click();
         element.findElement(By.name("phone")).sendKeys("12345");
         sendEmailAndPassword();
         clickCreateAccountButton();

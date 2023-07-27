@@ -3,7 +3,10 @@ package ru.stqa.tests;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import ru.stqa.enums.Browsers;
 import ru.stqa.user_pages.UserTests;
+
+import static ru.stqa.enums.Browsers.FIREFOX;
 
 public class RegistrationTest extends UserTests {
 
@@ -11,7 +14,7 @@ public class RegistrationTest extends UserTests {
 
     @Before
     public void before() {
-        start();
+        start(FIREFOX);
     }
 
     @Test

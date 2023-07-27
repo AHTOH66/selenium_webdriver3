@@ -10,7 +10,7 @@ import static ru.stqa.enums.Currency.USD;
 
 public class AddNewProductTest extends AdminTests {
 
-    private final StringBuilder name = new StringBuilder(new RandomGeneration().randomAlphabeticalString());
+    private final String name = new RandomGeneration().randomAlphabeticalString();
 
     @Before
     public void before() {
@@ -27,7 +27,7 @@ public class AddNewProductTest extends AdminTests {
         getAddNewProductPage()
                 .clickGeneralTab()
                 .clickEnabled()
-                .inputName(name.toString())
+                .inputName(name)
                 .inputCode("code")
                 .selectProductGroupUnisexCheckbox()
                 .inputQuantity("300")
@@ -45,7 +45,7 @@ public class AddNewProductTest extends AdminTests {
         getAddNewProductPage()
                 .clickSaveButton();
         getCatalogPage()
-                .checkAddedNewProduct(name.toString());
+                .checkAddedNewProduct(name);
         adminLogout();
     }
 
