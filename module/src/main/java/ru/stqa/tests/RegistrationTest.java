@@ -20,11 +20,11 @@ public class RegistrationTest extends UserTests {
                 .clickNewCustomerLink()
                 .registrationNewUser();
         getLeftRailBlock()
-                .logout();
+                .userLogout();
         getLeftRailBlock()
                 .login(email, "password");
         getLeftRailBlock()
-                .logout();
+                .userLogout();
     }
 
     @After

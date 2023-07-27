@@ -47,6 +47,10 @@ public class LeftRailMenu extends SetBrowser {
         clickLinkOnLeftRail("Geo Zones");
     }
 
+    public void clickCatalogPage() {
+        clickLinkOnLeftRail("Catalog");
+    }
+
     private ArrayList<WebElement> getAllLeftRailsLinks() {
         return new ArrayList<>(element.findElements(By.id("app-")));
     }

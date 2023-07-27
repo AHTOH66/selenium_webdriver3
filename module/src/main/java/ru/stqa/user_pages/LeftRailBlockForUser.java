@@ -18,7 +18,7 @@ public class LeftRailBlockForUser extends UserTests {
         return new CreateAccountPage();
     }
 
-    public void logout() {
+    public void userLogout() {
         WebElement boxAccount = element.findElement(By.id("box-account"));
         boxAccount.findElement(By.linkText("Logout")).click();
         driver.findElement(By.className("success")).isDisplayed();
