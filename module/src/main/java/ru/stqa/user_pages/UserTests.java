@@ -24,6 +24,18 @@ public class UserTests extends SetBrowser {
         return new BlocksOnMainUserPage();
     }
 
+    public ProductPage getProductPage() {
+        return new ProductPage();
+    }
+
+    public CartPage getCartPage() {
+        return new CartPage();
+    }
+
+    public HeaderBlock getHeaderBlock() {
+        return new HeaderBlock();
+    }
+
     public LeftRailBlockForUser getLeftRailBlock() {
         return new LeftRailBlockForUser();
     }

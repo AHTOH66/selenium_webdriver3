@@ -1,5 +1,6 @@
 package ru.stqa.tests.support;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
@@ -48,11 +49,15 @@ public class SetBrowser {
 
     public void cleanUpBrowser() {
         if (tlDriver.get() != null) {
-            if (driver !=null) {
+            if (driver != null) {
                 driver.quit();
                 driver = null;
             }
             tlDriver.set(null);
         }
+    }
+
+    public boolean isElementPresent(By locator) {
+        return !tlDriver.get().findElements(locator).isEmpty();
     }
 }

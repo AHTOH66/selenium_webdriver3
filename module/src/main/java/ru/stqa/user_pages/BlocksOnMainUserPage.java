@@ -23,6 +23,11 @@ public class BlocksOnMainUserPage extends SetBrowser {
         return this;
     }
 
+    public BlocksOnMainUserPage clickOnProductMostPopularBlock() {
+        getAllDucks(mostPopularBlock).get(0).click();
+        return this;
+    }
+
     public BlocksOnMainUserPage checkCampaignsStickers() {
         checkOnlyOneSticker(getAllDucks(campaigns));
         return this;
