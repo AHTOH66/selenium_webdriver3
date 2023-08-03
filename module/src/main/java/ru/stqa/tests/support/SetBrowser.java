@@ -2,6 +2,7 @@ package ru.stqa.tests.support;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -10,6 +11,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import ru.stqa.enums.Browsers;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class SetBrowser {
@@ -45,6 +47,7 @@ public class SetBrowser {
     private void setUp() {
         tlDriver.set(driver);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
     }
 
     public void cleanUpBrowser() {
@@ -59,5 +62,26 @@ public class SetBrowser {
 
     public boolean isElementPresent(By locator) {
         return !tlDriver.get().findElements(locator).isEmpty();
+    }
+
+    public void checkExternalLinks(WebElement element) {
+        String mainWindow = tlDriver.get().getWindowHandle();
+        if (!(tlDriver.get().getWindowHandles().size() == 1)) {
+            ArrayList<String> allWindows = new ArrayList<>(tlDriver.get().getWindowHandles());
+            allWindows.remove(mainWindow);
+            for (String allWindow : allWindows) {
+                tlDriver.get().switchTo().window(allWindow);
+                tlDriver.get().close();
+            }
+            tlDriver.get().switchTo().window(mainWindow);
+        }
+        element.click();
+        ArrayList<String> allWindows = new ArrayList<>(tlDriver.get().getWindowHandles());
+        assert allWindows.size() > 1;
+        allWindows.remove(mainWindow);
+        tlDriver.get().switchTo().window(allWindows.get(0));
+        tlDriver.get().close();
+        tlDriver.get().switchTo().window(mainWindow);
+        assert tlDriver.get().getWindowHandles().size() == 1;
     }
 }

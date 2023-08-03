@@ -43,6 +43,10 @@ public class AdminTests extends SetBrowser {
         return new AddNewProductPage();
     }
 
+    public AddNewCountryPage getAddNewCountryPage() {
+        return new AddNewCountryPage();
+    }
+
     public void adminLogout() {
         new LeftRailMenu().logout();
     }

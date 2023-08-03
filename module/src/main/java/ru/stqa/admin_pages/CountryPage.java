@@ -30,4 +30,8 @@ public class CountryPage extends SetBrowser {
     public ArrayList<WebElement> getAllRowCountries() {
         return new ArrayList<>(element.findElements(By.className("row")));
     }
+
+    public void clickAddNewCountryButton() {
+        element.findElement(By.linkText("Add New Country")).click();
+    }
 }
