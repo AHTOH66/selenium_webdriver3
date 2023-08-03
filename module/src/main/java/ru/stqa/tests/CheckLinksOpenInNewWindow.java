@@ -14,7 +14,7 @@ public class CheckLinksOpenInNewWindow extends AdminTests {
     }
 
     @Test
-    public void addNewProductPage() {
+    public void checkExternalLinksOnAddCountryPage() {
         getLeftRailMenu()
                 .clickCountriesPage();
         getCountryPage()
