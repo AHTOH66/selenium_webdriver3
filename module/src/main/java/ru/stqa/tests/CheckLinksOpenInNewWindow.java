@@ -21,6 +21,7 @@ public class CheckLinksOpenInNewWindow extends AdminTests {
                 .clickAddNewCountryButton();
         getAddNewCountryPage()
                 .checkExternalLinksForEditCountry();
+        adminLogout();
     }
 
     @After
