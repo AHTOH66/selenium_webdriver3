@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import ru.stqa.enums.Browsers;
 
 import java.io.File;
@@ -16,16 +17,16 @@ import java.util.concurrent.TimeUnit;
 
 public class SetBrowser {
 
-    public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
-    public WebDriver driver;
+    public static ThreadLocal<EventFiringWebDriver> tlDriver = new ThreadLocal<>();
+    public EventFiringWebDriver driver;
 
     public WebDriver setBrowser(Browsers browser) {
         cleanUpBrowser();
         switch (browser) {
-            case CHROME -> driver = new ChromeDriver();
-            case FIREFOX -> driver = setBinary("Mozilla Firefox");
-            case NIGHTLY -> driver = setBinary("Firefox Nightly");
-            case EDGE -> driver = new InternetExplorerDriver();
+            case CHROME -> driver = new EventFiringWebDriver(new ChromeDriver());
+            case FIREFOX -> driver = new EventFiringWebDriver(setBinary("Mozilla Firefox"));
+            case NIGHTLY -> driver = new EventFiringWebDriver(setBinary("Firefox Nightly"));
+            case EDGE -> driver = new EventFiringWebDriver(new InternetExplorerDriver());
         }
         setUp();
         return driver;
@@ -33,7 +34,7 @@ public class SetBrowser {
 
     public WebDriver setBrowser() {
         cleanUpBrowser();
-        driver = new ChromeDriver();
+        driver = new EventFiringWebDriver(new ChromeDriver());
         setUp();
         return driver;
     }
@@ -46,6 +47,7 @@ public class SetBrowser {
 
     private void setUp() {
         tlDriver.set(driver);
+        driver.register(new MyListener());
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }

@@ -20,4 +20,16 @@ public class CatalogPage extends SetBrowser {
         WebElement dataTable = element.findElement(By.className("dataTable"));
         dataTable.findElement(By.xpath(".//a[contains(., '" + name + "')]")).isDisplayed();
     }
+
+    public void checkLogsOfProductPages() {
+        ArrayList<WebElement> elementsList = new ArrayList<>(driver.findElements(By.className("row")));
+        for (int e = 1; e < elementsList.size(); e++) {
+            elementsList.get(e).findElements(By.xpath(".//a")).get(0).click();
+            if (!driver.findElement(By.tagName("h1")).getText().equals("Catalog")) {
+                assert driver.manage().logs().get("browser").getAll().isEmpty();
+                driver.navigate().back();
+            }
+            elementsList = new ArrayList<>(driver.findElements(By.className("row")));
+        }
+    }
 }
